@@ -3,10 +3,6 @@ enum Metric {
     Name = 'name',
   }
   
-  enum MetricLabel {
-    Steps = 'steps',
-  }
-  
   enum GraphType {
     MultiLine = 'Multi Line',
     BarChart = 'Bar Chart',
@@ -18,7 +14,7 @@ enum Metric {
   }
   
   enum Time {
-    Start = '08/24/2021 12:00 pm',
+    Start = '08/24/2021 11:00 am',
     SevenDaysAgo = '7 days ago',
     Now = 'now',
   }
@@ -43,7 +39,6 @@ enum Metric {
     hideXAxis: boolean,
     showYAxis: boolean,
     title: string,
-    metric: MetricLabel,
     value_suffix: Suffix
   }
   
@@ -99,7 +94,6 @@ enum Metric {
             hideSummary: false,
             hideToolTip: false,
             showYAxis: true,
-            metric: MetricLabel.Steps,
             value_suffix:Suffix.Steps,
             hideMissing: false,
             showDots: true
@@ -128,7 +122,6 @@ enum Metric {
             hideSummary: false,
             hideToolTip: false,
             showYAxis: true,
-            metric: MetricLabel.Steps,
             value_suffix:Suffix.Steps,
             hideMissing: false,
             showDots: false
