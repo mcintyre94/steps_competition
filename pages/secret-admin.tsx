@@ -1,24 +1,7 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-
 const today = new Date().toISOString().slice(0, 10)
 
-
 const SecretAdmin = () =>
+  <div className="flex items-center justify-center p-4">
     <form className="space-y-8 divide-y divide-gray-200" action="/api/secret-admin-submit" method="POST">
         <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
           <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
@@ -98,5 +81,6 @@ const SecretAdmin = () =>
           </div>
         </div>
       </form>
+  </div>
 
 export default SecretAdmin
