@@ -1,9 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { getSecretAdminApiKey } from "../../lib/env"
+
+const secretAdminApiKey = getSecretAdminApiKey()
 
 export default async (req: NextApiRequest, res:  NextApiResponse) => {
     const { name, date, steps, secretKey } = req.body
     
-    if(secretKey != process.env.SECRET_ADMIN_API_KEY) {
+    if(secretKey != secretAdminApiKey) {
         res.status(401).send('Incorrect secret key!')
         return
     }

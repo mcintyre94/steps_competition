@@ -13,3 +13,11 @@ export const getApiKey = (): string => {
     }
     return graphJsonProjectRuns
   }
+
+  export const getSecretAdminApiKey = (): string => {
+    const secretAdminApiKey = process.env.SECRET_ADMIN_API_KEY
+    if(!secretAdminApiKey) {
+      throw 'Missing environment variable SECRET_ADMIN_API_KEY. This should be a long random password';
+    }
+    return secretAdminApiKey
+  } 
