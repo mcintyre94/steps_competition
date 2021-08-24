@@ -18,7 +18,7 @@ enum Metric {
   }
   
   enum Time {
-    Start = '08/20/2021 12:00 pm', // TODO change on launch to 24th (?)
+    Start = '08/24/2021 12:00 pm',
     SevenDaysAgo = '7 days ago',
     Now = 'now',
   }
@@ -28,7 +28,7 @@ enum Metric {
   }
   
   enum Timezone {
-    London = 'Europe/London',
+    UTC = 'Etc/UTC',
   }
   
   enum Suffix {
@@ -84,9 +84,9 @@ enum Metric {
   export const makeStepsComparisonIframeUrl = async (apiKey: string, stepsProject: string) => {
     const payload: GraphJSONPayload = {
         api_key: apiKey,
-        IANA_time_zone: Timezone.London,
+        IANA_time_zone: Timezone.UTC,
         graph_type: GraphType.MultiLine,
-        start: Time.SevenDaysAgo,
+        start: Time.Start,
         end: Time.Now,
         filters: [projectFilter(stepsProject)],
         metric: Metric.Steps,
@@ -114,7 +114,7 @@ enum Metric {
   export const makeStepsTotalIframeUrl = async (apiKey: string, stepsProject: string) => {
     const payload: GraphJSONPayload = {
         api_key: apiKey,
-        IANA_time_zone: Timezone.London,
+        IANA_time_zone: Timezone.UTC,
         graph_type: GraphType.BarChart,
         start: Time.Start,
         end: Time.Now,
