@@ -3,7 +3,7 @@ import { getSecretAdminApiKey } from "../../lib/env"
 
 const secretAdminApiKey = getSecretAdminApiKey()
 
-export default async (req: NextApiRequest, res:  NextApiResponse) => {
+export default async function Handler(req: NextApiRequest, res:  NextApiResponse) {
     const { name, date: dateString, steps, secretKey } = req.body
     
     if(secretKey != secretAdminApiKey) {
