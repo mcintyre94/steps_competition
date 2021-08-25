@@ -66,6 +66,9 @@ enum Metric {
   
   const projectFilter = (project: string): GraphJSONFilter =>
     ["project", "=", project]
+
+  const dayOfWeekFilter = (dayOfWeek: string): GraphJSONFilter =>
+    ["dayOfWeek", "=", dayOfWeek]
   
   const requestIframeURL = async (payload: GraphJSONPayload) => {
     const response = await fetch('https://www.graphjson.com/api/visualize/iframe', {
@@ -147,7 +150,35 @@ enum Metric {
         split: Metric.DayOfWeek,
         customizations: {
             hideXAxis: false,
-            title: "Total by day of week",
+            title: "Total by day of week (everyone)",
+            hideSummary: false,
+            hideToolTip: false,
+            showYAxis: true,
+            value_suffix:Suffix.Steps,
+            hideMissing: false,
+            showDots: false
+        }
+      };
+
+    console.log(payload)
+
+    return requestIframeURL(payload)
+  }
+
+  export const makeMondayTotalIframeUrl = async (apiKey: string, stepsProject: string) => {
+    const payload: GraphJSONPayload = {
+        api_key: apiKey,
+        IANA_time_zone: Timezone.UTC,
+        graph_type: GraphType.BarChart,
+        start: Time.Start,
+        end: Time.Now,
+        filters: [projectFilter(stepsProject), dayOfWeekFilter('Monday')],
+        metric: Metric.Steps,
+        aggregation: Aggregation.Sum,
+        split: Metric.Name,
+        customizations: {
+            hideXAxis: false,
+            title: "Total on Mondays (Monday Motivation)",
             hideSummary: false,
             hideToolTip: false,
             showYAxis: true,

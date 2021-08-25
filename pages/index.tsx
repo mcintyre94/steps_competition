@@ -17,12 +17,17 @@ export async function getStaticProps() {
     apiKey,
     graphJSONProject
   );
+  const mondayBarChartIframeUrl = await graphjson.makeMondayTotalIframeUrl(
+    apiKey,
+    graphJSONProject
+  );
 
   return {
     props: {
       splitIframeUrl,
       barChartIframeURl,
       dayOfWeekBarChartIframeUrl,
+      mondayBarChartIframeUrl,
     },
   };
 }
@@ -45,6 +50,7 @@ type HomeProps = {
   splitIframeUrl: string;
   barChartIframeURl: string;
   dayOfWeekBarChartIframeUrl: string;
+  mondayBarChartIframeUrl: string;
 };
 
 export default function Home(props: HomeProps) {
@@ -82,6 +88,8 @@ export default function Home(props: HomeProps) {
         <Iframe url={props.barChartIframeURl}></Iframe>
 
         <Iframe url={props.dayOfWeekBarChartIframeUrl}></Iframe>
+
+        <Iframe url={props.mondayBarChartIframeUrl}></Iframe>
       </div>
     </>
   );
