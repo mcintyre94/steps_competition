@@ -99,7 +99,7 @@ enum Metric {
             hideToolTip: false,
             showYAxis: true,
             value_suffix:Suffix.Steps,
-            hideMissing: false,
+            hideMissing: true,
             showDots: true
         }
       };
