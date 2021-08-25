@@ -13,11 +13,16 @@ export async function getStaticProps() {
     apiKey,
     graphJSONProject
   );
+  const dayOfWeekBarChartIframeUrl = await graphjson.makeDaysOfWeekTotalIframeUrl(
+    apiKey,
+    graphJSONProject
+  );
 
   return {
     props: {
       splitIframeUrl,
-      barChartIframeURl
+      barChartIframeURl,
+      dayOfWeekBarChartIframeUrl,
     },
   };
 }
@@ -39,9 +44,10 @@ function Iframe({ url }: IframeProps) {
 type HomeProps = {
   splitIframeUrl: string;
   barChartIframeURl: string;
+  dayOfWeekBarChartIframeUrl: string;
 };
 
-export default function Home({ splitIframeUrl, barChartIframeURl }: HomeProps) {
+export default function Home(props: HomeProps) {
   return (
     <>
       <Head>
@@ -71,9 +77,11 @@ export default function Home({ splitIframeUrl, barChartIframeURl }: HomeProps) {
       <div className="flex flex-col gap-y-4 items-center justify-center p-4">
         <h1 className="prose prose-2xl text-blue-600">The Steps Competition</h1>
 
-        <Iframe url={splitIframeUrl}></Iframe>
+        <Iframe url={props.splitIframeUrl}></Iframe>
 
-        <Iframe url={barChartIframeURl}></Iframe>
+        <Iframe url={props.barChartIframeURl}></Iframe>
+
+        <Iframe url={props.dayOfWeekBarChartIframeUrl}></Iframe>
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 enum Metric {
     Steps = 'steps',
     Name = 'name',
+    DayOfWeek = 'dayOfWeek',
   }
   
   enum GraphType {
@@ -130,5 +131,33 @@ enum Metric {
 
     console.log(payload)
   
+    return requestIframeURL(payload)
+  }
+
+  export const makeDaysOfWeekTotalIframeUrl = async (apiKey: string, stepsProject: string) => {
+    const payload: GraphJSONPayload = {
+        api_key: apiKey,
+        IANA_time_zone: Timezone.UTC,
+        graph_type: GraphType.BarChart,
+        start: Time.Start,
+        end: Time.Now,
+        filters: [projectFilter(stepsProject)],
+        metric: Metric.Steps,
+        aggregation: Aggregation.Sum,
+        split: Metric.DayOfWeek,
+        customizations: {
+            hideXAxis: false,
+            title: "Total by day of week",
+            hideSummary: false,
+            hideToolTip: false,
+            showYAxis: true,
+            value_suffix:Suffix.Steps,
+            hideMissing: false,
+            showDots: false
+        }
+      };
+
+    console.log(payload)
+
     return requestIframeURL(payload)
   }
