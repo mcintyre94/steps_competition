@@ -4,7 +4,7 @@ import { getSecretAdminApiKey } from "../../lib/env"
 const secretAdminApiKey = getSecretAdminApiKey()
 
 export default async (req: NextApiRequest, res:  NextApiResponse) => {
-    const { name, date, steps, secretKey } = req.body
+    const { name, date: dateString, steps, secretKey } = req.body
     
     if(secretKey != secretAdminApiKey) {
         res.status(401).send('Incorrect secret key!')
@@ -16,7 +16,7 @@ export default async (req: NextApiRequest, res:  NextApiResponse) => {
         return
     }
 
-    if(!date) {
+    if(!dateString) {
         res.status(400).send('Missing date!')
         return
     }
@@ -26,14 +26,21 @@ export default async (req: NextApiRequest, res:  NextApiResponse) => {
         res.status(400).send('Missing or invalid steps!')
         return
     }
-    
-    const timestamp = Math.floor(new Date(date).setUTCHours(12) / 1000)
+
+    const date = new Date(dateString).setUTCHours(12)
+
+    const dayOfWeek = new Intl.DateTimeFormat('en-US', {
+        weekday: 'long'
+    }).format(date);
 
     const event = {
         project: process.env.GRAPHJSON_PROJECT,
         name,
         steps: parsedSteps,
+        dayOfWeek,
     }
+
+    const timestamp = Math.floor(date / 1000)
 
     const payload = {
         api_key: process.env.GRAPHJSON_API_KEY,
@@ -50,7 +57,7 @@ export default async (req: NextApiRequest, res:  NextApiResponse) => {
     });
 
     if(response.status == 200) {
-        const message = `Recorded ${parsedSteps} steps for ${name} on ${date}`;
+        const message = `Recorded ${parsedSteps} steps for ${name} on ${timestamp}`;
         res.status(200).send(message)
         return
     } else {
