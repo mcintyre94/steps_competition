@@ -89,7 +89,7 @@ enum Metric {
         end: Time.Now,
         filters: [projectFilter(stepsProject)],
         metric: Metric.Steps,
-        aggregation: Aggregation.Avg,
+        aggregation: Aggregation.Sum,
         granularity: Granularity.Day,
         split: Metric.Name,
         customizations: {
