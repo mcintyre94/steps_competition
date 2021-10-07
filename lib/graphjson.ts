@@ -8,7 +8,7 @@ enum Metric {
     MultiLine = 'Multi Line',
     BarChart = 'Bar Chart',
   }
-  
+
   enum Aggregation {
     Avg = 'Avg',
     Sum = 'Sum',
@@ -16,6 +16,7 @@ enum Metric {
   
   enum Time {
     Start = '08/24/2021 11:00 am',
+    FourWeeksAgo = '4 weeks ago',
     SevenDaysAgo = '7 days ago',
     Now = 'now',
   }
@@ -85,7 +86,7 @@ enum Metric {
         api_key: apiKey,
         IANA_time_zone: Timezone.UTC,
         graph_type: GraphType.MultiLine,
-        start: Time.Start,
+        start: Time.FourWeeksAgo,
         end: Time.Now,
         filters: [projectFilter(stepsProject)],
         metric: Metric.Steps,
@@ -94,7 +95,7 @@ enum Metric {
         split: Metric.Name,
         customizations: {
             hideXAxis: false,
-            title: "Steps per day",
+            title: "Steps per day (last 4 weeks)",
             hideSummary: false,
             hideToolTip: false,
             showYAxis: true,
@@ -114,7 +115,7 @@ enum Metric {
         api_key: apiKey,
         IANA_time_zone: Timezone.UTC,
         graph_type: GraphType.BarChart,
-        start: Time.Start,
+        start: Time.FourWeeksAgo,
         end: Time.Now,
         filters: [projectFilter(stepsProject)],
         metric: Metric.Steps,
@@ -122,7 +123,7 @@ enum Metric {
         split: Metric.Name,
         customizations: {
             hideXAxis: false,
-            title: "Total since start (24th Aug)",
+            title: "Total last 4 weeks",
             hideSummary: false,
             hideToolTip: false,
             showYAxis: true,
